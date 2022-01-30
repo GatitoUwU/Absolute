@@ -6,6 +6,7 @@ import lombok.Setter;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
  * This code has been created by
@@ -18,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Setter
 public class Lobby {
     private final String id;
-    private final Set<UUID> players = ConcurrentHashMap.newKeySet();
+    private ConcurrentSkipListSet<UUID> players = new ConcurrentSkipListSet<>();
     private int maxPlayers = 0;
 
     public Lobby(String id) {
@@ -27,5 +28,14 @@ public class Lobby {
 
     public boolean isAvailable() {
         return players.size() > maxPlayers;
+    }
+
+    public void load(LobbyData lobbyData) {
+        this.players = lobbyData.getPlayers();
+        this.maxPlayers = lobbyData.getMaxPlayers();
+    }
+
+    public LobbyData export() {
+        return new LobbyData(id, players, maxPlayers);
     }
 }
