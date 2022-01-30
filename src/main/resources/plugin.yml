@@ -1,0 +1,8 @@
+name: Absolute
+version: '${project.version}'
+main: es.vytale.absolute.Absolute
+authors: [ "change-me-later" ]
+depend:
+  - Milanesa
+description: Absolute es un núcleo para lobbies, implementando la API Milanesa.
+website: https://github.com/VytaleNW
