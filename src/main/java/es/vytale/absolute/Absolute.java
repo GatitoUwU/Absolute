@@ -22,7 +22,6 @@ public class Absolute extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
     }
 
     public void log(String s) {

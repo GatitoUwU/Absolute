@@ -5,7 +5,9 @@ import es.vytale.milanesa.common.objects.CachedManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 
-import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This code has been created by
@@ -17,7 +19,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
 @Getter
 public class LobbyManager extends CachedManager<String, Lobby> {
     private final Absolute absolute;
-    private LobbyData selfData;
+    private Lobby selfData;
 
     public LobbyManager(Absolute absolute) {
         this.absolute = absolute;
@@ -33,10 +35,15 @@ public class LobbyManager extends CachedManager<String, Lobby> {
         }
         int id = absolute.getConfig().getInt("lobbyId", 0);
 
-        this.selfData = new LobbyData(String.valueOf(id), new ConcurrentSkipListSet<>(), Bukkit.getMaxPlayers());
+        this.selfData = new Lobby(String.valueOf(id));
+        this.selfData.setMaxPlayers(Bukkit.getMaxPlayers());
 
         new LobbyInformerTask(this).runTaskTimerAsynchronously(absolute, 20L, 20L);
         absolute.getMilanesa().getMilanesaMessageHandler().registerChannel(new LobbyChannel(absolute));
+    }
+
+    public List<Lobby> getLobbiesOrdered() {
+        return getAll().stream().sorted(Comparator.comparing(Lobby::getConnected)).collect(Collectors.toList());
     }
 
     @Override

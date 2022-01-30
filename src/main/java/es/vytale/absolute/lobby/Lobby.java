@@ -3,9 +3,7 @@ package es.vytale.absolute.lobby;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
@@ -37,5 +35,9 @@ public class Lobby {
 
     public LobbyData export() {
         return new LobbyData(id, players, maxPlayers);
+    }
+
+    public int getConnected() {
+        return players.size();
     }
 }

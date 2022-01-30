@@ -17,7 +17,7 @@ public class LobbyInformerTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        LobbyData lobbyData = lobbyManager.getSelfData();
+        LobbyData lobbyData = lobbyManager.getSelfData().export();
         lobbyData.getPlayers().clear();
         Bukkit.getOnlinePlayers().forEach(player -> lobbyData.getPlayers().add(player.getUniqueId()));
         lobbyManager.getAbsolute().getMilanesa().getMilanesaMessageHandler().sendMessage("lobbies::update", lobbyData);

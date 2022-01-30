@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import es.vytale.absolute.Absolute;
 import es.vytale.milanesa.common.redis.data.MilanesaChannel;
 import es.vytale.milanesa.common.redis.data.MilanesaMessage;
-import lombok.RequiredArgsConstructor;
 
 /**
  * This code has been created by
